@@ -1,0 +1,37 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-midosuji-dev-184905-authRole",
+      "UnauthRoleArn": "arn:aws:iam::447071708180:role/amplify-midosuji-dev-184905-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::447071708180:role/amplify-midosuji-dev-184905-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-midosuji-dev-184905-deployment",
+      "UnauthRoleName": "amplify-midosuji-dev-184905-unauthRole",
+      "StackName": "amplify-midosuji-dev-184905",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:447071708180:stack/amplify-midosuji-dev-184905/4558c530-592d-11ee-a205-0e3c28701bab",
+      "AmplifyAppId": "d10qzj2az0r4nn"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {},
+        "amplifyhosting": {
+          "appId": "d10qzj2az0r4nn",
+          "type": "manual"
+        }
+      }
+    }
+  },
+  "midosuji": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-midosuji-midosuji-201229-authRole",
+      "UnauthRoleArn": "arn:aws:iam::447071708180:role/amplify-midosuji-midosuji-201229-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::447071708180:role/amplify-midosuji-midosuji-201229-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-midosuji-midosuji-201229-deployment",
+      "UnauthRoleName": "amplify-midosuji-midosuji-201229-unauthRole",
+      "StackName": "amplify-midosuji-midosuji-201229",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:447071708180:stack/amplify-midosuji-midosuji-201229/ebe3a770-5938-11ee-99a3-0ecc75d2444f",
+      "AmplifyAppId": "d10qzj2az0r4nn"
+    }
+  }
+}
