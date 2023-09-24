@@ -1,33 +1,13 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import styles from "@/styles/Home.module.scss";
 import apis from "@/apis";
-import { useEffect, useState } from "react";
 import { TheMovieDatabaseResponse } from "@/apis/tmdb";
 
-const Movies: NextPage = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [movies, setMovies] = useState<TheMovieDatabaseResponse>();
+type Props = { movies: TheMovieDatabaseResponse };
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await apis.tmdb.getMovies();
-
-        setMovies(response);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch movies:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
-
-  return isLoading ? (
-    <></>
-  ) : (
+const Movies: NextPage<Props> = ({ movies }) => {
+  return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -59,13 +39,15 @@ const Movies: NextPage = () => {
   );
 };
 
-// export const getStaticProps: GetStaticProps<TheMovieDatabaseResponse> = async () => {
-//   return {
-//     props: {
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const response = await apis.tmdb.getMovies();
 
-//     },
-//     revalidate: 1,
-//   }
-// }
+  return {
+    props: {
+      movies: response,
+    },
+    revalidate: 5,
+  };
+};
 
 export default Movies;
