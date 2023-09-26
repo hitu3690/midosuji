@@ -26,7 +26,6 @@ const MoviesCard: FunctionComponent<Props> = ({
         <div className={styles.imageArea}>
           <StickyLabel
             label={index.toString()}
-            // 先頭 1位 ~ 3位まで
             isTopRanking={1 <= index && index < 4}
           />
           <img
