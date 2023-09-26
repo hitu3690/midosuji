@@ -7,5 +7,7 @@
   "plugins": [
     "stylelint-scss"
   ],
-  "rules": {}
+  "rules": {
+    "scss/at-import-no-partial-leading-underscore": null
+  }
 }
