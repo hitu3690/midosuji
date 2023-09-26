@@ -1,10 +1,11 @@
 {
   "extends": [
     "stylelint-config-recommended",
+    "stylelint-config-recommended-scss",
     "stylelint-config-styled-components"
   ],
-  "processors": [
-    "stylelint-processor-styled-components"
+  "plugins": [
+    "stylelint-scss"
   ],
   "rules": {}
 }
