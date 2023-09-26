@@ -96,27 +96,6 @@
     .cardRatingArea {
       display: flex;
       margin-top: 5px;
-
-      .cardRatingContainer {
-        -webkit-box-align: center;
-        align-items: center;
-        display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        flex-direction: row;
-        -webkit-box-pack: start;
-        justify-content: flex-start;
-
-        .cardRating {
-          color: $midosuji-gold-yellow;
-          -webkit-box-align: center;
-          align-items: center;
-          display: inline-box;
-          display: inline-flex;
-          -webkit-box-pack: center;
-          justify-content: center;
-        }
-      }
     }
 
     .releaseArea {
