@@ -1,13 +1,16 @@
 import { TheMovieDatabaseAPIClient } from "./tmdb";
 
 interface APIService {
-  tmdb: TheMovieDatabaseAPIClient
+  tmdb: TheMovieDatabaseAPIClient;
 }
 
 class API implements APIService {
   get tmdb(): TheMovieDatabaseAPIClient {
     return new TheMovieDatabaseAPIClient({
-      baseURL: 'https://api.themoviedb.org/3/discover/movie',
+      baseURL: process.env.NEXT_PUBLIC_TMDB_API_URL,
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      },
     });
   }
 }

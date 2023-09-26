@@ -1,46 +1,42 @@
 import type { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
-import styles from "@/styles/Home.module.scss";
 import apis from "@/apis";
 import { TheMovieDatabaseResponse } from "@/apis/tmdb";
+import MoviesCardList from "@/features/movies/components/MoviesCardList";
+import styles from "@/features/movies/styles/Movies.module.scss";
+import MoviesHeader from "@/features/movies/components/MoviesHeader";
+import MoviesFooter from "@/features/movies/components/MoviesFooter";
+import MoviesGenreBar from "@/features/movies/components/MoviesGenreBar";
+import MoviesTitle from "@/features/movies/components/MoviesTitle";
+import { Language, SortBy } from "@/types";
 
 type Props = { movies: TheMovieDatabaseResponse };
 
-const Movies: NextPage<Props> = ({ movies }) => {
+const Movies: NextPage<Props> = ({ movies: { results } }) => {
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        {movies?.results &&
-          movies.results.map((result) => (
-            <div className={styles.grid}>
-              <a href="https://nextjs.org/docs" className={styles.card}>
-                <h2>{result.title} &rarr;</h2>
-                <p>{result.overview}</p>
-              </a>
-            </div>
-          ))}
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <MoviesHeader />
+      <div className={styles.main}>
+        <div className={styles.mainContainer}>
+          <div className={styles.breadcrumb}></div>
+          <div className={styles.tab}></div>
+          <div className={styles.mainContainerContent}>
+            <MoviesTitle />
+            <MoviesGenreBar />
+            <MoviesCardList results={results} />
+          </div>
+        </div>
+      </div>
+      <MoviesFooter />
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await apis.tmdb.getMovies();
+  // Popular Moviesを取得
+  const response = await apis.tmdb.getTMDBMovies({
+    language: Language.Ja,
+    sort_by: SortBy.PopularDesc,
+  });
 
   return {
     props: {

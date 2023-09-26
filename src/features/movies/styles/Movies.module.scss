@@ -1,0 +1,145 @@
+@import "../../../styles/variables";
+
+.container {
+  min-width: $body-width-size;
+}
+
+.main {
+  margin: 0;
+  width: auto;
+
+  .mainContainer {
+    width: $main-width-size;
+    margin: 0 auto;
+
+    .mainContainerContent {
+      margin: 30px 0 60px;
+    }
+  }
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-content: stretch;
+  align-items: stretch;
+  margin: -10px;
+
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+}
+
+.card {
+  align-self: auto;
+  width: $card-width-size;
+  margin: 10px;
+
+  .cardContainer {
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    .imageArea {
+      margin-bottom: 10px;
+      position: relative;
+      background: #eee;
+      height: 429px;
+
+      > img {
+        display: block;
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    .titleArea {
+      display: box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 1;
+      margin-bottom: 5px;
+      text-align: left;
+
+      .cardTitle {
+        color: $midosuji-black;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        font-family:
+          Noto Sans JP,
+          メイリオ,
+          Meiryo,
+          ヒラギノ角ゴ Pro W3,
+          Hiragino Kaku Gothic Pro,
+          MS PGothic,
+          ＭＳ Ｐゴシック,
+          sans-serif;
+      }
+    }
+
+    .cardOverview {
+      display: box;
+      color: $midosuji-gray;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+    }
+
+    .releaseArea {
+      -webkit-box-align: center;
+      align-items: center;
+      display: box;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-flow: row;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      margin-top: 5px;
+
+      .cardReleaseDate {
+        font-size: 14px;
+        font-family:
+          Lato,
+          Noto Sans JP,
+          メイリオ,
+          Meiryo,
+          ヒラギノ角ゴ Pro W3,
+          Hiragino Kaku Gothic Pro,
+          MS PGothic,
+          ＭＳ Ｐゴシック,
+          sans-serif;
+        font-weight: 700;
+        line-height: 15px;
+      }
+
+      .cardIsRelease {
+        background-color: #000;
+        color: #fff;
+        padding: 1px 8px;
+
+        > span {
+          font-size: 14px;
+          font-family:
+            Noto Sans JP,
+            メイリオ,
+            Meiryo,
+            ヒラギノ角ゴ Pro W3,
+            Hiragino Kaku Gothic Pro,
+            MS PGothic,
+            ＭＳ Ｐゴシック,
+            sans-serif;
+          line-height: 15px;
+        }
+      }
+    }
+  }
+}

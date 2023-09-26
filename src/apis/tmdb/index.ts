@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { APIClient } from "../client";
-import { LanguageCode } from "@/types";
+import { Language, OriginalLanguage, SortBy } from "@/types";
 
 /** The Movie Database API current weather のレスポンスの型 */
 export interface TheMovieDatabaseResponse {
@@ -15,7 +15,7 @@ export interface TheMovieDatabaseResult {
   backdrop_path: string;
   genre_ids: Array<number>;
   id: number;
-  original_language: LanguageCode;
+  original_language: OriginalLanguage;
   original_title: string;
   overview: string;
   popularity: number;
@@ -28,27 +28,31 @@ export interface TheMovieDatabaseResult {
   vote_count: number;
 }
 
+export interface TheMovieDatabaseRequest {
+  language: Language;
+  sort_by: SortBy;
+}
+
 export class TheMovieDatabaseAPIClient extends APIClient {
   constructor(requestConfig: AxiosRequestConfig) {
     super(requestConfig);
   }
 
   /**
-   * CurrentWeatherを取得
+   * Movies を取得
    */
-  public async getMovies(): Promise<TheMovieDatabaseResponse> {
-    const query = this.getMoviesQuery();
-    const endpoint = `${this.requestConfig.baseURL}?${query}`;
+  public async getTMDBMovies(
+    params: TheMovieDatabaseRequest
+  ): Promise<TheMovieDatabaseResponse> {
+    const query = new URLSearchParams({
+      include_adult: "false",
+      include_video: "false",
+      ...params,
+    });
+    const endpoint = `${this.requestConfig.baseURL}/movie/popular?${query}`;
 
     const response = await this.get<TheMovieDatabaseResponse>(endpoint);
-    console.log({ response });
 
     return response.data;
-  }
-
-  private getMoviesQuery(): string {
-    const query = `api_key=a17e7b03c579ff09faa20b31fac0c2a3&sort_by=popularity.desc&region=JP&language=ja-JP&with_original_language=ja`;
-
-    return query;
   }
 }

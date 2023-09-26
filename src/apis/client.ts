@@ -1,29 +1,31 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { CustomError, ErrorMessage } from './errorHandler';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { CustomError, ErrorMessage } from "./errorHandler";
 
 export class APIClient {
   private readonly axiosInstance: AxiosInstance;
-  protected requestConfig: AxiosRequestConfig = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    baseURL: '',
-  };
+  protected requestConfig: AxiosRequestConfig = {};
 
   constructor(config: AxiosRequestConfig) {
-    this.requestConfig.baseURL = config.baseURL ?? '';
+    this.requestConfig = {
+      baseURL: config.baseURL ?? "",
+      headers: {
+        "Content-Type": config.headers?.["Content-Type"] ?? "application/json",
+        Authorization: config.headers?.Authorization,
+      },
+    };
+
     this.axiosInstance = axios.create(this.requestConfig);
 
     this.axiosInstance.interceptors.response.use(
       this.handleResponseSuccess,
-      this.handleResponseError,
+      this.handleResponseError
     );
   }
 
   // # region response interceptor
   // レスポンス成功時
   private handleResponseSuccess = (
-    response: AxiosResponse<unknown>,
+    response: AxiosResponse<unknown>
   ): AxiosResponse<unknown> => response;
 
   // レスポンス失敗時のエラーハンドリング
@@ -39,10 +41,8 @@ export class APIClient {
   // fetch api
   public async get<T>(
     url: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    params?: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): Promise<AxiosResponse<T, any>> {
+    params?: unknown
+  ): Promise<AxiosResponse<T, unknown>> {
     const response = await this.axiosInstance.get<T>(url, { params });
 
     return response;
@@ -50,10 +50,8 @@ export class APIClient {
 
   public async post<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    params?: any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): Promise<AxiosResponse<T, any>> {
+    params?: unknown
+  ): Promise<AxiosResponse<T, unknown>> {
     const response = await this.axiosInstance.post<T>(url, { params });
 
     return response;
