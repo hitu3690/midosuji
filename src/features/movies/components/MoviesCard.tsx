@@ -1,6 +1,12 @@
 import { FunctionComponent } from "react";
 import styles from "@/features/movies/styles/Movies.module.scss";
 import StickyLabel from "@/components/elements/StickyLabel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStar as fasStar,
+  faStarHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 
 interface Props {
   title: string;
@@ -37,6 +43,25 @@ const MoviesCard: FunctionComponent<Props> = ({
           <span className={styles.cardTitle}>{title}</span>
         </div>
         <span className={styles.cardOverview}>{overview}</span>
+        <div className={styles.cardRatingArea}>
+          <div className={styles.cardRatingContainer}>
+            <div className={styles.cardRating}>
+              <FontAwesomeIcon icon={fasStar} fixedWidth />
+            </div>
+            <div className={styles.cardRating}>
+              <FontAwesomeIcon icon={fasStar} fixedWidth />
+            </div>
+            <div className={styles.cardRating}>
+              <FontAwesomeIcon icon={fasStar} fixedWidth />
+            </div>
+            <div className={styles.cardRating}>
+              <FontAwesomeIcon icon={faStarHalfStroke} fixedWidth />
+            </div>
+            <div className={styles.cardRating}>
+              <FontAwesomeIcon icon={farStar} fixedWidth />
+            </div>
+          </div>
+        </div>
         <div className={styles.releaseArea}>
           <div className={styles.cardReleaseDate}>{releaseDate}</div>
           <div className={styles.cardIsRelease}>
