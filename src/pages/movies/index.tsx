@@ -7,7 +7,7 @@ import MoviesHeader from "@/features/movies/components/MoviesHeader";
 import MoviesFooter from "@/features/movies/components/MoviesFooter";
 import MoviesGenreBar from "@/features/movies/components/MoviesGenreBar";
 import MoviesTitle from "@/features/movies/components/MoviesTitle";
-import { Language, SortBy } from "@/types";
+import { Language, SortBy, TMDBPath } from "@/types";
 
 type Props = { movies: TheMovieDatabaseResponse };
 
@@ -33,7 +33,7 @@ const Movies: NextPage<Props> = ({ movies: { results } }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   // Popular Moviesを取得
-  const response = await apis.tmdb.getTMDBMovies({
+  const response = await apis.tmdb.getTMDBMovies(TMDBPath.PopularMovie, {
     language: Language.Ja,
     sort_by: SortBy.PopularDesc,
   });

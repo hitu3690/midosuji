@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { APIClient } from "../client";
-import { Language, OriginalLanguage, SortBy } from "@/types";
+import { Language, OriginalLanguage, SortBy, TMDBPath } from "@/types";
 
 /** The Movie Database API current weather のレスポンスの型 */
 export interface TheMovieDatabaseResponse {
@@ -42,6 +42,7 @@ export class TheMovieDatabaseAPIClient extends APIClient {
    * Movies を取得
    */
   public async getTMDBMovies(
+    path: TMDBPath,
     params: TheMovieDatabaseRequest
   ): Promise<TheMovieDatabaseResponse> {
     const query = new URLSearchParams({
@@ -49,7 +50,7 @@ export class TheMovieDatabaseAPIClient extends APIClient {
       include_video: "false",
       ...params,
     });
-    const endpoint = `${this.requestConfig.baseURL}/movie/popular?${query}`;
+    const endpoint = `${this.requestConfig.baseURL}${path}?${query}`;
 
     const response = await this.get<TheMovieDatabaseResponse>(endpoint);
 

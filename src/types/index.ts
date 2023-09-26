@@ -22,7 +22,7 @@ export type OriginalLanguage =
   (typeof OriginalLanguage)[keyof typeof OriginalLanguage];
 
 /**
- * 言語コード
+ * 並び順
  * @export
  * @enum {string}
  */
@@ -31,3 +31,13 @@ export const SortBy = {
   VoteDesc: "vote_average.desc",
 } as const;
 export type SortBy = (typeof SortBy)[keyof typeof SortBy];
+
+/**
+ * TMDB API Path
+ * @export
+ * @enum {string}
+ */
+export const TMDBPath = {
+  PopularMovie: "/movie/popular",
+} as const;
+export type TMDBPath = (typeof TMDBPath)[keyof typeof TMDBPath];
