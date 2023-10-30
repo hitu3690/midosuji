@@ -22,6 +22,7 @@ const MoviesCardList: FunctionComponent<Props> = ({ results }) => {
             releaseDate={release_date}
             voteAverage={vote_average}
             index={index + 1}
+            key={index + 1}
           />
         )
       )}

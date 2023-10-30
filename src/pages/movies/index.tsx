@@ -1,5 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
-import apis from "@/apis";
+import type { NextPage } from "next";
 import { TheMovieDatabaseResponse } from "@/apis/tmdb";
 import MoviesCardList from "@/features/movies/components/MoviesCardList";
 import styles from "@/features/movies/styles/Movies.module.scss";
@@ -7,11 +6,15 @@ import MoviesHeader from "@/features/movies/components/MoviesHeader";
 import MoviesFooter from "@/features/movies/components/MoviesFooter";
 import MoviesGenreBar from "@/features/movies/components/MoviesGenreBar";
 import MoviesTitle from "@/features/movies/components/MoviesTitle";
-import { Language, SortBy, TMDBPath } from "@/types";
+import { usePopularMovies } from "@/apis/tmdb/hooks";
 
-type Props = { movies: TheMovieDatabaseResponse };
+type Props = { movies?: TheMovieDatabaseResponse };
 
-const Movies: NextPage<Props> = ({ movies: { results } }) => {
+const Movies: NextPage<Props> = () => {
+  const { movies } = usePopularMovies();
+
+  if (movies === undefined) return <div>Now Loading...</div>;
+
   return (
     <div className={styles.container}>
       <MoviesHeader />
@@ -22,7 +25,7 @@ const Movies: NextPage<Props> = ({ movies: { results } }) => {
           <div className={styles.mainContainerContent}>
             <MoviesTitle />
             <MoviesGenreBar />
-            <MoviesCardList results={results} />
+            <MoviesCardList results={movies.results} />
           </div>
         </div>
       </div>
@@ -31,19 +34,15 @@ const Movies: NextPage<Props> = ({ movies: { results } }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  // Popular Moviesを取得
-  const response = await apis.tmdb.getTMDBMovies(TMDBPath.PopularMovie, {
-    language: Language.Ja,
-    sort_by: SortBy.PopularDesc,
-  });
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   const { movies } = usePopularMovies();
 
-  return {
-    props: {
-      movies: response,
-    },
-    revalidate: 5,
-  };
-};
+//   return {
+//     props: {
+//       movies,
+//     },
+//     revalidate: 5,
+//   };
+// };
 
 export default Movies;
